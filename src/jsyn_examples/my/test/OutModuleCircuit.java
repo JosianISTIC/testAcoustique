@@ -1,4 +1,4 @@
-package jsyn_examples.my.test;
+package my.test;
 
 import com.jsyn.Synthesizer;
 import com.jsyn.ports.ConnectableInput;

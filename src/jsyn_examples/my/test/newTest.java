@@ -1,13 +1,11 @@
-package jsyn_examples.my.test;
+package my.test;
 
 import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
 import com.jsyn.scope.AudioScope;
 import com.jsyn.unitgen.*;
-import jsyn_examples.my.test.vca.JSynVCA;
-import jsyn_examples.my.test.vca.VCA;
-import jsyn_examples.my.test.vca.VCAAmFilter;
-import jsyn_examples.my.test.vca.VCAInFilter;
+import my.test.vca.VCAAmFilter;
+import my.test.vca.VCAInFilter;
 
 import javax.swing.*;
 

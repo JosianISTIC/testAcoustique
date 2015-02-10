@@ -1,4 +1,4 @@
-package jsyn_examples.my.test.vca;
+package my.test.vca;
 
 import com.jsyn.unitgen.Circuit;
 import com.jsyn.unitgen.UnitGenerator;

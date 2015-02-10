@@ -1,4 +1,4 @@
-package jsyn_examples.my.test;
+package my.test;
 
 import com.jsyn.unitgen.UnitFilter;
 import com.softsynth.math.AudioMath;

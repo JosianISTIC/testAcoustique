@@ -1,4 +1,4 @@
-package jsyn_examples.my.test.vca;
+package my.test.vca;
 
 import java.util.Observer;
 import java.util.Set;
