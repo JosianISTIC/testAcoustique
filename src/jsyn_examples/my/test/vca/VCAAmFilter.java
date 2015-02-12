@@ -21,8 +21,8 @@ public class VCAAmFilter extends UnitFilter {
 
         for (int i = start; i < limit; i += 1) {
             double amValue = inputsAm[i];
-            outputs[i] =  Math.pow(10,-(amValue));
-
+            //outputs[i] =  Math.pow(10,-(amValue));
+            outputs[i] =  amValue;
         }
     }
 }

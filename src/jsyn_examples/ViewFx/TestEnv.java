@@ -54,15 +54,17 @@ public class TestEnv extends JApplet
 		
 		PassThrough p = new PassThrough();
 		synth.add(p);
-		p.input.connect(osc.output);
-		dahdsr.output.connect(p.input);
-		//dahdsr.output.connect( osc.amplitude );
-		
-		dahdsr.attack.setup( 0.001, 0.01, 2.0 );
-		osc.output.connect( 0, lineOut.input, 0 );
-		osc.output.connect( 0, lineOut.input, 1 );
+		//osc.amplitude.connect(p.output);
+        p.output.connect(osc.amplitude);
+        p.output.connect(dahdsr.input);
+		//dahdsr.output.connect(p.output);
 
-		gatingOsc.frequency.setup( 0.001, 0.5, 10.0 );
+		
+		dahdsr.attack.setup( 0.001, 0.0, 2.0 );
+		osc.output.connect( 0, lineOut.input, 0 );
+        osc.output.connect( 0, lineOut.input, 1 );
+
+		gatingOsc.frequency.setup( 0.00, 0.5, 10.0 );
 		gatingOsc.frequency.setName("Rate");
 
 		osc.frequency.setup( 50.0, 440.0, 2000.0 );
@@ -114,7 +116,7 @@ public class TestEnv extends JApplet
 	/* Can be run as either an application or as an applet. */
 	public static void main( String args[] )
 	{
-		HearDAHDSR applet = new HearDAHDSR();
+        TestEnv applet = new TestEnv();
 		JAppletFrame frame = new JAppletFrame( "Hear DAHDSR Envelope", applet );
 		frame.setSize( 640, 200 );
 		frame.setVisible( true );

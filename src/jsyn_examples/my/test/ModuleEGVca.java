@@ -4,6 +4,7 @@ import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
 import com.jsyn.scope.AudioScope;
 import com.jsyn.unitgen.*;
+import my.test.vca.AmplitudeModulationFilter;
 import my.test.vca.VCAAmFilter;
 import my.test.vca.VCAInFilter;
 
@@ -11,7 +12,7 @@ import javax.swing.*;
 
 /**
  */
-public class newTest {
+public class ModuleEGVca {
 
     static private String g;
 
@@ -23,6 +24,7 @@ public class newTest {
         synth = JSyn.createSynthesizer();
         myFilter filter = new myFilter();
         EnvelopeDAHDSR envelopeDAHDSR = new EnvelopeDAHDSR();
+        AmplitudeModulationFilter amfilter = new AmplitudeModulationFilter(10);
         osc = new SawtoothOscillator();
         /**Circuit c = new Circuit();
         Circuit c2 = new Circuit();
@@ -40,6 +42,7 @@ public class newTest {
         synth.add(filter);
         synth.add(lineOut);
         synth.add(envelopeDAHDSR);
+        synth.add(amfilter);
 
         osc.frequency.set(1);
         envelopeDAHDSR.delay.set(0); //Time in seconds for first stage of the envelope, before the attack.
@@ -48,11 +51,11 @@ public class newTest {
 
         envelopeDAHDSR.attack.set(0.2); //Time in seconds for the rising stage of the envelope to go from 0.0 to 1.0.
         envelopeDAHDSR.decay.set(0.2); //Time in seconds for the falling stage to go from 0 dB to -90 dB.
-        envelopeDAHDSR.sustain.set(0); //Level for the sustain stage.
-        envelopeDAHDSR.release.set(0.2); //Time in seconds to go from 0 dB to -90 dB.
+        envelopeDAHDSR.sustain.set(0.0); //Level for the sustain stage.
+        envelopeDAHDSR.release.set(0.0); //Time in seconds to go from 0 dB to -90 dB.
 
-        osc.getOutput().connect(envelopeDAHDSR.input);
-
+        osc.getOutput().connect(amfilter.input);
+        envelopeDAHDSR.input.connect(amfilter.output);
         /**osc.getOutput().connect(lineOut.input.getConnectablePart(0));
         osc.getOutput().connect(lineOut.input.getConnectablePart(1));**/
 
