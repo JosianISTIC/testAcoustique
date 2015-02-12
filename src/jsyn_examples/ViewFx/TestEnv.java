@@ -1,4 +1,4 @@
-package com.jsyn.examples;
+package ViewFx;
 
 import java.awt.GridLayout;
 
@@ -7,6 +7,7 @@ import javax.swing.JApplet;
 
 import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
+import com.jsyn.examples.HearDAHDSR;
 import com.jsyn.ports.UnitInputPort;
 import com.jsyn.swing.DoubleBoundedRangeModel;
 import com.jsyn.swing.JAppletFrame;
@@ -14,6 +15,7 @@ import com.jsyn.swing.PortModelFactory;
 import com.jsyn.swing.RotaryTextController;
 import com.jsyn.unitgen.EnvelopeDAHDSR;
 import com.jsyn.unitgen.LineOut;
+import com.jsyn.unitgen.PassThrough;
 import com.jsyn.unitgen.SineOscillator;
 import com.jsyn.unitgen.SquareOscillator;
 import com.jsyn.unitgen.UnitOscillator;
@@ -25,7 +27,7 @@ import com.jsyn.unitgen.UnitOscillator;
  * @author Phil Burk (C) 2010 Mobileer Inc
  * 
  */
-public class HearDAHDSR extends JApplet
+public class TestEnv extends JApplet
 {
 	private static final long serialVersionUID = -2704222221111608377L;
 	private Synthesizer synth;
@@ -40,7 +42,7 @@ public class HearDAHDSR extends JApplet
 		synth = JSyn.createSynthesizer();
 		
 		// Add a tone generator.
-		synth.add( osc = new SquareOscillator() );
+		synth.add( osc = new SineOscillator() );
 		// Add a trigger.
 		synth.add( gatingOsc = new SquareOscillator() );
 		// Use an envelope to control the amplitude.
@@ -49,7 +51,13 @@ public class HearDAHDSR extends JApplet
 		synth.add( lineOut = new LineOut() );
 
 		gatingOsc.output.connect( dahdsr.input );
-		dahdsr.output.connect( osc.amplitude );
+		
+		PassThrough p = new PassThrough();
+		synth.add(p);
+		p.input.connect(osc.output);
+		dahdsr.output.connect(p.input);
+		//dahdsr.output.connect( osc.amplitude );
+		
 		dahdsr.attack.setup( 0.001, 0.01, 2.0 );
 		osc.output.connect( 0, lineOut.input, 0 );
 		osc.output.connect( 0, lineOut.input, 1 );

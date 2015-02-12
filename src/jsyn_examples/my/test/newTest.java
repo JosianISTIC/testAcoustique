@@ -23,7 +23,7 @@ public class newTest {
         synth = JSyn.createSynthesizer();
         myFilter filter = new myFilter();
         EnvelopeDAHDSR envelopeDAHDSR = new EnvelopeDAHDSR();
-        osc = new SquareOscillator();
+        osc = new SawtoothOscillator();
         /**Circuit c = new Circuit();
         Circuit c2 = new Circuit();
         Circuit c3 = new Circuit();
@@ -46,10 +46,10 @@ public class newTest {
         envelopeDAHDSR.hold.set(0); //Time in seconds for the plateau between the attack and decay stages.
 
 
-        envelopeDAHDSR.attack.set(0.1); //Time in seconds for the rising stage of the envelope to go from 0.0 to 1.0.
-        envelopeDAHDSR.decay.set(0.1); //Time in seconds for the falling stage to go from 0 dB to -90 dB.
-        envelopeDAHDSR.sustain.set(0.0); //Level for the sustain stage.
-        envelopeDAHDSR.release.set(0.1); //Time in seconds to go from 0 dB to -90 dB.
+        envelopeDAHDSR.attack.set(0.2); //Time in seconds for the rising stage of the envelope to go from 0.0 to 1.0.
+        envelopeDAHDSR.decay.set(0.2); //Time in seconds for the falling stage to go from 0 dB to -90 dB.
+        envelopeDAHDSR.sustain.set(0); //Level for the sustain stage.
+        envelopeDAHDSR.release.set(0.2); //Time in seconds to go from 0 dB to -90 dB.
 
         osc.getOutput().connect(envelopeDAHDSR.input);
 
@@ -62,7 +62,7 @@ public class newTest {
         //filter.output.connect(lineOut.input.getConnectablePart(1));
 
         SquareOscillator osc2 = new SquareOscillator();
-        osc2.frequency.set(440);
+        osc2.frequency.set(300);
         synth.add(osc2);
         try {
 
